@@ -5,7 +5,7 @@
 Summary:   Xorg X11 fpit input driver
 Name:      xorg-x11-drv-fpit
 Version:   1.4.0
-Release:   6%{?dist}
+Release:   7%{?dist}
 URL:       http://www.x.org
 License:   MIT
 Group:     User Interface/X Hardware Support
@@ -70,6 +70,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/hal/fdi/policy/20thirdparty/10-fpit.fdi
 
 %changelog
+* Wed Nov 11 2015 Adam Jackson <ajax@redhat.com> - 1.4.0-7
+- Rebuild for server 1.17
+
 * Wed Apr 23 2014 Adam Jackson <ajax@redhat.com> 1.4.0-6
 - Rebuild for server 1.15
 
