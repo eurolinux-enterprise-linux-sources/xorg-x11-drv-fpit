@@ -1,0 +1,29 @@
+From 84566da9614ab3e7fab89fd3b0a62c156bcfc2fa Mon Sep 17 00:00:00 2001
+From: Peter Hutterer <peter.hutterer@who-t.net>
+Date: Tue, 19 Jul 2011 15:52:11 +1000
+Subject: [PATCH 5/6] Check for priv before dereferencing it.
+
+We can hit this path when the priv alloc fails.
+
+Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+---
+ src/xf86Fpit.c |    3 ++-
+ 1 files changed, 2 insertions(+), 1 deletions(-)
+
+diff --git a/src/xf86Fpit.c b/src/xf86Fpit.c
+index 05f9941..5e9e593 100644
+--- a/src/xf86Fpit.c
++++ b/src/xf86Fpit.c
+@@ -543,7 +543,8 @@ static int xf86FpitAllocate(InputDriverPtr drv, InputInfoPtr pInfo)
+ static void xf86FpitUninit(InputDriverPtr drv, InputInfoPtr pInfo, int flags)
+ {
+ 	FpitPrivatePtr priv = (FpitPrivatePtr) pInfo->private;
+-	free(priv->fpitDev);
++	if (priv)
++            free(priv->fpitDev);
+ 	free(priv);
+ 	pInfo->private = NULL;
+ 	xf86DeleteInput(pInfo, 0);
+-- 
+1.7.6
+

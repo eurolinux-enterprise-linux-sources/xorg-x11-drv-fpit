@@ -1,0 +1,26 @@
+From f1404be2ee16b6a30c1eedc53da81535eff4288f Mon Sep 17 00:00:00 2001
+From: Peter Hutterer <peter.hutterer@who-t.net>
+Date: Tue, 19 Jul 2011 12:32:50 +1000
+Subject: [PATCH 4/6] Don't call DEVICE_OFF in UnInit, the server does it for
+ us
+
+Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+---
+ src/xf86Fpit.c |    1 -
+ 1 files changed, 0 insertions(+), 1 deletions(-)
+
+diff --git a/src/xf86Fpit.c b/src/xf86Fpit.c
+index 0f60125..05f9941 100644
+--- a/src/xf86Fpit.c
++++ b/src/xf86Fpit.c
+@@ -543,7 +543,6 @@ static int xf86FpitAllocate(InputDriverPtr drv, InputInfoPtr pInfo)
+ static void xf86FpitUninit(InputDriverPtr drv, InputInfoPtr pInfo, int flags)
+ {
+ 	FpitPrivatePtr priv = (FpitPrivatePtr) pInfo->private;
+-	xf86FpitControl(pInfo->dev, DEVICE_OFF);
+ 	free(priv->fpitDev);
+ 	free(priv);
+ 	pInfo->private = NULL;
+-- 
+1.7.6
+

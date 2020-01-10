@@ -1,0 +1,26 @@
+From fdc1b6aba2c9b8d44063d097a7a0676ea9c16faf Mon Sep 17 00:00:00 2001
+From: Peter Hutterer <peter.hutterer@who-t.net>
+Date: Tue, 19 Jul 2011 11:45:00 +1000
+Subject: [PATCH 3/6] Use xf86SetStrOption to print Option Device to the log
+
+Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+---
+ src/xf86Fpit.c |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/src/xf86Fpit.c b/src/xf86Fpit.c
+index 3ab7297..0f60125 100644
+--- a/src/xf86Fpit.c
++++ b/src/xf86Fpit.c
+@@ -565,7 +565,7 @@ static int xf86FpitInit(InputDriverPtr drv, InputInfoPtr pInfo, int flags)
+ 		return rc;
+ 
+ 	priv = pInfo->private;
+-	str = xf86FindOptionValue(pInfo->options, "Device");
++	str = xf86SetStrOption(pInfo->options, "Device", NULL);
+ 	if (!str) {
+ 		xf86Msg(X_ERROR, "%s: No Device specified in FPIT module config.\n", pInfo->name);
+ 		return BadValue;
+-- 
+1.7.6
+
