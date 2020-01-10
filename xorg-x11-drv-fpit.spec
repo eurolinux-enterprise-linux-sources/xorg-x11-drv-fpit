@@ -5,7 +5,7 @@
 Summary:   Xorg X11 fpit input driver
 Name:      xorg-x11-drv-fpit
 Version:   1.4.0
-Release:   2%{?dist}
+Release:   5%{?dist}
 URL:       http://www.x.org
 License:   MIT
 Group:     User Interface/X Hardware Support
@@ -19,6 +19,7 @@ Patch03:   0003-Use-xf86SetStrOption-to-print-Option-Device-to-the-l.patch
 Patch04:   0004-Don-t-call-DEVICE_OFF-in-UnInit-the-server-does-it-f.patch
 Patch05:   0005-Check-for-priv-before-dereferencing-it.patch
 Patch06:   0006-Don-t-assign-a-static-name-strdup-it.patch
+Patch07:   0007-Don-t-force-pInfo-flags-to-0-40870.patch
 
 ExcludeArch: s390 s390x
 
@@ -38,6 +39,7 @@ X.Org X11 fpit input driver.
 %patch04 -p1
 %patch05 -p1
 %patch06 -p1
+%patch07 -p1
 
 %build
 %configure --disable-static
@@ -68,6 +70,15 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/hal/fdi/policy/20thirdparty/10-fpit.fdi
 
 %changelog
+* Wed Aug 22 2012 Peter Hutterer <peter.hutterer@redhat.com> - 1.4.0-5
+- Rebuild for server 1.13
+
+* Mon Aug 20 2012 Peter Hutterer <peter.hutterer@redhat.com> 1.4.0-4
+- Don't overwrite pInfo->flags to avoid the device come up floating (#835229)
+
+* Wed Aug 01 2012 Peter Hutterer <peter.hutterer@redhat.com> - 1.4.0-3
+- Rebuild for server 1.13 (#835229)
+
 * Tue Jul 19 2011 Peter Hutterer <peter.hutterer@redhat.com> 1.4.0-2
 - Fix crashers if PreInit fails
 
